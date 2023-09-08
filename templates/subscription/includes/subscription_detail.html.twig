@@ -1,0 +1,8 @@
+<div class="card m-2 pt-3" style="width: 18rem;">
+    <img src="https://fakeimg.pl/600x400" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ subscription.name }}</h5>
+        <p class="card-text">Liste der letzten Zahlungen.</p>
+        <a href="{{ path('detailSubscription', {'id': subscription.id}) }}" class="btn btn-primary">Detail</a>
+    </div>
+</div>

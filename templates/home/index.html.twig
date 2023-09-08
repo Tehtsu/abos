@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Danke fürs folgen!</h2>
+    <h2>Deine-Abos</h2>
+    <a href="{{ path('listSubscriptions') }}" class="btn btn-info">zur Aboübersicht</a>
+    <a href="{{ path('listCategories') }}" class="btn btn-info">zur Kategorieübersicht</a>
 {% endblock %}

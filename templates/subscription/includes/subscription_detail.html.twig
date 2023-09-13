@@ -3,6 +3,6 @@
     <div class="card-body">
         <h5 class="card-title">{{ subscription.name }}</h5>
         <p class="card-text">Liste der letzten Zahlungen.</p>
-        <a href="{{ path('detailSubscription', {'id': subscription.id}) }}" class="btn btn-primary">Detail</a>
+        <a href="{{ path('detailSubscription', {'id': subscription.id}) }}" class="btn btn-primary" id="button" aria-describedby="tooltip">Detail</a>
     </div>
 </div>

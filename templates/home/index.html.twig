@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Deine-Abos</h2>
-    <a href="{{ path('listSubscriptions') }}" class="btn btn-info">zur Aboübersicht</a>
-    <a href="{{ path('listCategories') }}" class="btn btn-info">zur Kategorieübersicht</a>
+
+    {% if app.user is empty %}
+        <h2>Welcome to "Your subscriptions </h2>
+        <p>Please log in to manage your subscriptions</p>
+        <a href="{{ path('app_login') }}" class="btn btn-info">Login</a>
+    {% endif %}
+
+    {% if app.user %}
+        <h2>Welcome to "Your subscriptions {{ app.user.userIdentifier }} </h2>
+        <a href="{{ path('listSubscriptions') }}" class="btn btn-info">zur Aboübersicht</a>
+        <a href="{{ path('listCategories') }}" class="btn btn-info">zur Kategorieübersicht</a>
+        <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
+    {% endif %}
 {% endblock %}

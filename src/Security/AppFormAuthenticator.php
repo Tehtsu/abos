@@ -26,6 +26,11 @@ class AppFormAuthenticator extends AbstractLoginFormAuthenticator
     {
     }
 
+    public function supports(Request $request): bool
+    {
+        return $request->attributes->get('_route') === 'app_login' && $request->isMethod('POST');
+    }
+
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -55,6 +60,6 @@ class AppFormAuthenticator extends AbstractLoginFormAuthenticator
 
     protected function getLoginUrl(Request $request): string
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        return $this->urlGenerator->generate('app_login');
     }
 }

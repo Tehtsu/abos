@@ -11,20 +11,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/app')]
 class SubscriptionController extends AbstractController
 {
-    #[Route('/subscriptions', name: 'listSubscriptions', methods: "GET")]
+    #[Route('/subscriptions', name: 'listSubscriptions', methods: ["GET"])]
     public function read(EntityManagerInterface $entityManager): Response
     {
-        $subscriptions = $entityManager->getRepository(SubscriptionEntity::class)->findAll();
+        $subscriptions = $entityManager
+            ->getRepository(SubscriptionEntity::class)
+            ->findBy(['user' => $this->getUser()]);
 
         return $this->render('subscription/list.html.twig', [
             'subscriptions' => $subscriptions
         ]);
     }
 
-    #[Route('/subscription/new', name: 'newSubscription', methods: 'GET')]
-    #[Route('/subscription/new', name: 'saveNewSubscription', methods: 'POST')]
+    #[Route('/subscription/new', name: 'newSubscription', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $subscription = new SubscriptionEntity();
@@ -49,6 +51,7 @@ class SubscriptionController extends AbstractController
     public function detail(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $subscription = $entityManager->getRepository(SubscriptionEntity::class)->find($id);
+        $this->denyAccessUnlessGranted('MANAGE',$subscription);
 
         $form = $this->createForm(SubscriptionType::class, $subscription);
         $form->handleRequest($request);

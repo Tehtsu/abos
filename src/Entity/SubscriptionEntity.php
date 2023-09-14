@@ -34,6 +34,9 @@ class SubscriptionEntity
     #[ORM\ManyToOne(targetEntity: CategoryEntity::class)]
     private ?CategoryEntity $category;
 
+    #[ORM\ManyToOne(inversedBy: 'subscriptionEntities')]
+    private ?User $user = null;
+
     public function getId(): int
     {
         return $this->id;
@@ -67,11 +70,18 @@ class SubscriptionEntity
         return $this;
     }
 
+    /**
+     * @return PaymentTypeEntity|null
+     */
     public function getPaymentType(): ?PaymentTypeEntity
     {
         return $this->paymentType;
     }
 
+    /**
+     * @param PaymentTypeEntity|null $paymentType
+     * @return $this
+     */
     public function setPaymentType(?PaymentTypeEntity $paymentType): self
     {
         $this->paymentType = $paymentType;
@@ -108,6 +118,18 @@ class SubscriptionEntity
     public function setCategory(?CategoryEntity $category): self
     {
         $this->category = $category;
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
         return $this;
     }
 

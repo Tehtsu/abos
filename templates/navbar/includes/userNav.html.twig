@@ -1,0 +1,23 @@
+{% if is_granted('ROLE_USER') %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            Abos
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ path('listSubscriptions') }}">Abo übersicht</a></li>
+            <li><a class="dropdown-item" href="{{ path('newSubscription') }}">Abo hinzufügen</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            Kategorien
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ path('listCategories') }}">Kategorie übersicht</a>
+            </li>
+            <li><a class="dropdown-item" href="{{ path('newCategory') }}">Kategorie hinzufügen</a></li>
+        </ul>
+    </li>
+{% endif %}
